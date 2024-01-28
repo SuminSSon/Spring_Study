@@ -15,17 +15,16 @@ public class LogDemoController {
     @Autowired
     private final LogDemoService logDemoService;
     @Autowired
-    private final ObjectProvider<MyLogger> myLoggerProvider;
+    private final MyLogger myLogger;
 
-    public LogDemoController(LogDemoService logDemoService, ObjectProvider<MyLogger> myLoggerProvider) {
+    public LogDemoController(LogDemoService logDemoService, MyLogger myLogger) {
         this.logDemoService = logDemoService;
-        this.myLoggerProvider = myLoggerProvider;
+        this.myLogger = myLogger;
     }
 
     @RequestMapping("log-demo")
     @ResponseBody
     public String logDemo(HttpServletRequest request) {
-        MyLogger myLogger = myLoggerProvider.getObject();
         String requestURL = request.getRequestURL().toString();
         myLogger.setRequestURL(requestURL);
 
